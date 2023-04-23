@@ -743,7 +743,20 @@
   <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet preconnect">
+<script>
+  function addButton() {
+ const map = document.getElementById("map");
+ const buttonDiv = document.createElement("button");
+ buttonDiv.className="map_button";
+ const link = document.createElement("a");
+ link.href = "https://www.google.com/maps";
+ link.innerHTML = "Click and go to map";
+ buttonDiv.appendChild(link);
+ map.appendChild(buttonDiv);
+  }
+  window.onload = addButton;
 
+</script>
 
 </head>
 
@@ -872,7 +885,7 @@
     <img src="https://community.dynatrace.com/html/assets/wave-blue-2.png">
   </div>
 
-  <div class="map-wrapper">
+  <div class="map-wrapper" id="map">
     <div class="map-content">
       <div class="map-content-title">
         <div class="map-content-title-light">
