@@ -161,6 +161,28 @@
       font-weight: bold;
     }
 
+    /* Added media query for benefit section below 900px [Task 2]*/
+
+    @media screen and (max-width: 900px) {
+      .benefits-content-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto auto;
+        grid-gap: 20px;
+      }
+
+      .benefits-content-list-element {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 5vw;
+      }
+
+      .benefits-content-list-icon {
+        margin-bottom: 10px;
+      }
+    }
+
     /* Join page - join component */
 
     .join-wrapper {
@@ -715,6 +737,7 @@
   <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet preconnect">
 
+
 </head>
 
 <body>
@@ -1126,6 +1149,33 @@
     </div>
   </div>
 
+  <!-- Added script and file register-page.js [Task 3]-->
+  <!-- <script>
+    // Create a new div element
+    const newDiv = document.createElement("div");
+
+    // Add some styles to the new div
+    newDiv.style.backgroundColor = "violet";
+    newDiv.style.padding = "10px";
+    newDiv.style.borderRadius = "5px";
+
+    // Create a new button element
+    const newButton = document.createElement("button");
+    newButton.innerText = "View on Google Maps";
+    newButton.style.backgroundColor = "white";
+    newButton.style.border = "none";
+    newButton.style.padding = "10px";
+    newButton.style.borderRadius = "5px";
+    newButton.style.cursor = "pointer";
+
+    // Add an event listener to the button to open Google Maps in a new tab
+    newButton.addEventListener("click", function () {
+      window.open("https://www.google.com/maps", "_blank");
+    });
+
+    // Append the button to the new div
+    newDiv.appendChild(newButton);
+  </script> -->
 </body>
 
 </html>
