@@ -5,7 +5,8 @@
  
 <#assign showPaging = "true" />
 <#assign sorting = http.request.parameters.name.get("sort", "") />
- <#--                                --> 
+ <#-- Set up page size to exactly 30 posts per page [Task 1 for lib-message-list] 
+ and removed colliding conditional to ensure forced 30 posts per page --> 
 <#-- page size -->
 <#assign pageSize = 30/>
  
@@ -38,17 +39,19 @@
    <#case "replies">
        <#assign orderClause = "ORDER BY replies.count(*) DESC " />
    <#break>
-   <#default>
+   <#-- Added additional sorting methods [Task 3 for lib-message-list]
+   used existing "recent" option, since it wasn't used before -->
+   <#case "recent>
        <#assign orderClause = "ORDER BY conversation.last_post_time DESC " />
    <#break>
-   <#case "kudos-asc">
+   <#case "kudos-from-lowest">
        <#assign orderClause = "ORDER BY kudos.sum(weight) ASC " />
    <#break>
    <#case "unanswered">
-       <#assign orderClause = "AND NOT EXISTS (SELECT 1 FROM posts p2 WHERE p2.conversation_id = conversation.id AND p2.answer_accepted = true) " />
+       <#assign orderClause = "ORDER BY replies.count(0)" />
    <#break>
    <#case "no-solution">
-       <#assign orderClause = "AND NOT EXISTS (SELECT 1 FROM posts p3 WHERE p3.conversation_id = conversation.id AND p3.solution = true) " />
+       <#assign orderClause = "ORDER BY (conversation.solved IS FALSE) DESC" />
    <#break>
    <#default>
        <#assign orderClause = "ORDER BY conversation.last_post_time DESC " />
@@ -82,6 +85,11 @@
                    <option value="views" <#if sorting == 'views'>selected</#if>>${text.format("theme-lib.community-activity.views")}</option>
                    <option value="replies" <#if sorting == 'replies'>selected</#if>>${text.format("theme-lib.community-activity.replies")}</option>
                    <option value="kudos" <#if sorting == 'kudos'>selected</#if>>${text.format("theme-lib.community-activity.kudos")}</option>
+              <#-- Added additional sorting methods to option dropdown menu [Task 3 for lib-message-list] -->
+                   <option value="kudos-from-lowest" <#if sorting == 'kudos-from-lowest'>selected</#if>>${text.format("theme-lib.community-activity.kudos-from-lowest")}</option>
+                   <option value="unanswered" <#if sorting == 'unanswered'>selected</#if>>${text.format("theme-lib.community-activity.unanswered")}</option>
+                   <option value="no-solution" <#if sorting == 'no-solution'>selected</#if>>${text.format("theme-lib.community-activity.no-solution")}</option>
+                   
                </select>
                <#if page.interactionStyle=="idea">
                  <@component id="custom.idea.status.label" />
@@ -154,6 +162,8 @@
        <#assign msg_status_icon = "custom-thread-floated" />
        <#assign msg_status_txt = "theme-lib.general.thread-floated" />
    </#if>
+
+   <-- Changed the name of class for solved threads [Task 2 for theme-lib-message-list] -->
    <#if msg.conversation.solved>
        <#assign solved = "new-thread-solved" />
        <#assign msg_status_icon = "new-thread-solved" />
