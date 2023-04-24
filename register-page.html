@@ -161,7 +161,9 @@
       font-weight: bold;
     }
 
-    /* Added media query for benefit section below 900px [Task 2]*/
+    /* Added media query for benefit section below 900px [Task 2]: 
+    benefits-content-list -> 2 rows with 3 elements for each,
+    benefits-content-icon -> set up to transform - after hover, icon become bigger */
 
     @media screen and (max-width: 900px) {
       .benefits-content-list {
@@ -183,8 +185,9 @@
         transition-property: transform;
         transition-duration: 300ms;
         transition-timing-function: ease;
-       
+
       }
+
       .benefits-content-list-icon:hover {
         transform: scale(1.4);
       }
@@ -237,8 +240,9 @@
 
     /*Join page - map component*/
 
+    /* Changed display from flex to block [Task 3] */
     .map-wrapper {
-      display: flex;
+      display: block;
     }
 
     .map-content-image {
@@ -269,6 +273,19 @@
       font-weight: 300;
       justify-content: center;
     }
+
+    /* Added some properties to class of button in map section [Task 3] */
+    .map_button {
+      background: url(https://community.dynatrace.com/html/assets/fullwave-multicolor-opt1@3x.jpg);
+      display: block;
+      margin: auto;
+      padding: 3vh 5vw;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 20px;
+    }
+
 
     /*Join page - Testimonials component*/
 
@@ -361,6 +378,7 @@
 
     #testimonials-carousel>.carousel-indicators>li {
       display: inline-block;
+      /* Added element to carousel, changed the size of width [Task 1]*/
       width: calc(100% / 5 - 50px);
       height: 0.6rem;
       margin: 20px;
@@ -373,6 +391,7 @@
 
     #testimonials-carousel .carousel-indicators .active {
       display: inline-block;
+      /* added element to carousel, changed the size of width [Task 1]*/
       width: calc(100% / 5 - 50px);
       height: 0.6rem;
       margin: 20px;
@@ -743,20 +762,24 @@
   <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet preconnect">
-<script>
-  function addButton() {
- const map = document.getElementById("map");
- const buttonDiv = document.createElement("button");
- buttonDiv.className="map_button";
- const link = document.createElement("a");
- link.href = "https://www.google.com/maps";
- link.innerHTML = "Click and go to map";
- buttonDiv.appendChild(link);
- map.appendChild(buttonDiv);
-  }
-  window.onload = addButton;
+  <script>
+    // Added function addButton in JS [Task 3]: 
+    function addButton() {
+      const map = document.getElementById("map");
+      const buttonDiv = document.createElement("div");
+      buttonDiv.className = "map_buttonDiv";
+      const button = document.createElement("button");
+      button.onclick = function () {
+        location.href = "https://www.google.com/maps";
+      };
+      button.innerText = "Click and go to map";
+      button.className = "map_button";
+      buttonDiv.appendChild(button);
+      map.appendChild(buttonDiv);
+    }
+    window.onload = addButton;
+  </script>
 
-</script>
 
 </head>
 
@@ -918,7 +941,7 @@
         </div>
       </div>
       <div id="testimonials-carousel" class="carousel slide" data-ride="carousel">
-        <!--Added data-slide-to [Task 1] -->
+        <!--Added new element with data-slide-to [Task 1] -->
         <ol class="carousel-indicators">
           <li data-target="#testimonials-carousel" data-slide-to="0" class="active"></li>
           <li data-target="#testimonials-carousel" data-slide-to="1"></li>
@@ -1027,7 +1050,7 @@
               </div>
             </div>
           </div>
-          <!-- Added another element to carousel with random text and picture [Task 1] -->
+          <!-- Added another element to carousel with random text and picture (added new photography, new description and name of job in paragraph and new heading with the name [Task 1] -->
           <div class="item">
             <div class="testimonials-quote-wrap">
               <div class="testimonials-quote-element">
@@ -1168,34 +1191,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Added script and file register-page.js [Task 3]-->
-  <!-- <script>
-    // Create a new div element
-    const newDiv = document.createElement("div");
-
-    // Add some styles to the new div
-    newDiv.style.backgroundColor = "violet";
-    newDiv.style.padding = "10px";
-    newDiv.style.borderRadius = "5px";
-
-    // Create a new button element
-    const newButton = document.createElement("button");
-    newButton.innerText = "View on Google Maps";
-    newButton.style.backgroundColor = "white";
-    newButton.style.border = "none";
-    newButton.style.padding = "10px";
-    newButton.style.borderRadius = "5px";
-    newButton.style.cursor = "pointer";
-
-    // Add an event listener to the button to open Google Maps in a new tab
-    newButton.addEventListener("click", function () {
-      window.open("https://www.google.com/maps", "_blank");
-    });
-
-    // Append the button to the new div
-    newDiv.appendChild(newButton);
-  </script> -->
 </body>
 
 </html>
